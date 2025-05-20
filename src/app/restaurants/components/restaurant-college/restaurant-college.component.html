@@ -1,0 +1,19 @@
+<div class="grid grid-cols-3 gap-4">
+  <!-- Imagen grande (ocupa 2 filas) -->
+  <div class="col-span-2 row-span-2 overflow-hidden bg-gray-200 flex items-center justify-center rounded-md">
+    <img class="area" [src]="images()[1] | restaurantImage" alt="" class="w-full h-full">
+  </div>
+
+  <!-- Imagen 1 -->
+  <div class="overflow-hidden bg-gray-200 flex items-center justify-center rounded-md">
+    <img [src]="images()[2] | restaurantImage" alt="" class="w-full h-full">
+  </div>
+
+  <!-- Imagen 2 -->
+  <div class="overflow-hidden bg-gray-200 flex items-center justify-center rounded-md">
+    <img [src]="images()[3] | restaurantImage" alt="" class="w-full h-full">
+  </div>
+</div>
+
+
+

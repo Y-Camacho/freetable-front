@@ -1,0 +1,24 @@
+<form  class="flex justify-between p-2">
+  <input type="text" class="input" (change)="searchNameRestaurant.set(restsname.value)" #restsname placeholder="Buscar por nombre">
+  <select name="" #reststag (change)="searchTagRestaurant.set(reststag.value)" class="select" id="">
+    <option disabled selected>Tags</option>
+    <option value="asiatico">Asiatico</option>
+    <option value="parrilla">Parrilla</option>
+    <option value="vegetariano">Vegetariano</option>
+    <option value="vegano">Vegano</option>
+  </select>
+
+  <button type="button" class="btn btn-neutral ml-auto">Buscar</button>
+</form>
+
+<h1 class="text-3xl mt-14">Recomendaciones</h1>
+
+<section class="flex flex-wrap gap-y-6 gap-x-1.5">
+  @for (restaurant of restaurantResource.value(); track restaurant.id) {
+    <restaurant-card  [restInfo]="restaurant" />
+  }
+  <!-- empty -->
+   @empty {
+    <p>No hay restaurantes</p>
+   }
+</section>

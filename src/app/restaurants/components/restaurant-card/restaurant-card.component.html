@@ -1,0 +1,16 @@
+<article class="flex gap-2.5 flex-col w-3xs p-1.5">
+  <img
+    [src]="restInfo().images[0] | restaurantImage"
+    alt="Imagen banner"
+    class="w-full h-40"
+  />
+  <h2
+    [routerLink]="['/restaurant', restInfo().id]"
+    class="text-2xl font-bold hover:text-blue-900 cursor-pointer"
+
+  >
+    {{ restInfo().name }}
+  </h2>
+
+  <p>{{ restInfo().description | slice: 0:100 }} ...</p>
+</article>
