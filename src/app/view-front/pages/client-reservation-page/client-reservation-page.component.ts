@@ -1,10 +1,11 @@
 import { ChangeDetectionStrategy, Component, inject, signal } from '@angular/core';
 import { ReservationsService } from '../../../reservations/services/reservations.service';
 import { rxResource } from '@angular/core/rxjs-interop';
+import { ReservationTableComponent } from "../../../reservations/components/reservation-table/reservation-table.component";
 
 @Component({
   selector: 'app-client-reservation-page',
-  imports: [],
+  imports: [ReservationTableComponent],
   templateUrl: './client-reservation-page.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
@@ -12,7 +13,7 @@ export class ClientReservationPageComponent {
 
   reservationsService = inject(ReservationsService);
 
-  clientEmail = signal<string>('juanPerez')
+  clientEmail = signal<string>('')
 
   reservationResource = rxResource({
     request: () => ({clientEmail: this.clientEmail()}),

@@ -1,5 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { RouterLink, RouterOutlet } from '@angular/router';
+import { AuthService } from '../../../auth/services/auth.service';
 
 @Component({
   selector: 'front-layout',
@@ -7,4 +8,7 @@ import { RouterLink, RouterOutlet } from '@angular/router';
   templateUrl: './front-layout.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class FrontLayoutComponent { }
+export class FrontLayoutComponent {
+
+  authService = inject(AuthService);
+}

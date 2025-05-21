@@ -30,14 +30,14 @@
       formControlName="hour"
       placeholder="Hora"
       class="input input-sm validator" required
-      min="09:00"
-      max="18:00"
-      step="900"
-      title="Solo se permiten reservas en cuartos de hora"
+      [class.input-error]="isInvalid('hour')"
+      title="Solo se permiten reservas en cuartos de hora entre las 9:00 y 18:00 h"
     />
     <span>Hora</span>
   </label>
-
+<!-- min="09:00"
+      max="18:00"
+      step="900" -->
   <h3 class="text-1xl col-span-2 ">Información del cliente</h3>
 
   <label class="floating-label col-span-2 ">
@@ -81,7 +81,21 @@
     <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
       <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
     </svg>
-    <span>Por favor, ingrese correctamente los datos en el formulario</span>
+    <p class="font-bold">Por favor, ingrese correctamente los datos en el formulario</p>
+    <ul>
+      <li>Todos los campos son obligatorios</li>
+      @if (reservationForm.get('date')?.errors?.['fechaInvalida']) {
+      <li>La fecha no puede ser anterior a la actual</li>
+      }
+      <!--  -->
+      @if (reservationForm.get('hour')?.errors?.['fueraDeRango']) {
+      <li>Solo se permiten reservas entre las 9:00 y 18:00 h</li>
+      }
+      <!--  -->
+      @if (reservationForm.get('date')?.errors?.['intervaloInvalido']) {
+      <li>Solo se permiten reservas en cuartos de hora</li>
+      }
+    </ul>
   </div>
 }
 <!--  -->

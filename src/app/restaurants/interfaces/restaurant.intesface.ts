@@ -5,6 +5,7 @@ export interface Restaurant {
   description: string;
   address:     string;
   numDiners:   number;
+  numberPhone: string;
   tags:        string[];
   images:      string[];
   menus:       string[];

@@ -26,14 +26,25 @@ export class ReservationFormComponent {
 
   reservationForm = this.fb.group({
     numDiners: [0, Validators.required],
-    date: ['', Validators.required],
-    hour: ['', Validators.required],
+    date: ['', [Validators.required, this.fechaMinimaValidator]],
+    hour: ['', [Validators.required, this.horaValidator]],
     clientEmail: ['', [Validators.required, Validators.email]],
     clientFullName: ['', Validators.required],
     clientPhone: ['', Validators.required],
     restaurantId: [Number(this.restaurantId)]
 
   });
+
+  fechaMinimaValidator(control: AbstractControl): ValidationErrors | null {
+    const inputDate = new Date(control.value);
+    const today = new Date();
+
+    // Set both to midnight to compare only the dates
+    inputDate.setHours(0, 0, 0, 0);
+    today.setHours(0, 0, 0, 0);
+
+    return inputDate >= today ? null : { fechaInvalida: true };
+  }
 
   horaValidator(control: AbstractControl): ValidationErrors | null {
     const value = control.value;
@@ -87,5 +98,9 @@ export class ReservationFormComponent {
       }, 4000);
     })
     console.log(this.reservationForm.value);
+  }
+    isInvalid(controlName: string): boolean {
+    const control = this.reservationForm.get(controlName);
+    return !!(control && control.invalid && (control.dirty || control.touched));
   }
 }
