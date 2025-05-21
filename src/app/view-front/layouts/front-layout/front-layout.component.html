@@ -1,8 +1,18 @@
 <div class="flex flex-col min-h-screen">
   <header>
-    <div class="navbar bg-base-100 shadow-sm">
-    <a class="btn btn-ghost text-xl" href="#">FreeTable</a>
-  </div>
+    <div class="navbar bg-base-100 shadow-sm flex">
+      <a class="btn btn-ghost text-xl" href="#">FreeTable</a>
+      <ul class="menu lg:menu-horizontal bg-base-200 rounded-box">
+        <li>
+          <details >
+            <summary></summary>
+            <ul>
+              <li><a routerLink="/client">Tus reservas</a></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </div>
   </header>
 
   <section class="flex-grow sm:w-[70%] xl:w-[60%] mx-auto" >

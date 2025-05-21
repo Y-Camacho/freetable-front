@@ -1,19 +1,23 @@
 <form
+  [formGroup]="reservationForm"
+  (ngSubmit)="onSubmit()"
   class="grid grid-cols-2 gap-1"
 >
   <label class="floating-label col-span-2">
     <input
       type="number"
+      formControlName="numDiners"
       class="input input-sm validator w-full"
       required placeholder="Número de comensales"
       min="1" max="20"
-  title="No pueden haber menos de 1 comensal ni más de 20" />
+      title="No pueden haber menos de 1 comensal ni más de 20" />
     <span>Número comensales</span>
   </label>
 
   <label class="floating-label">
     <input
       type="date"
+      formControlName="date"
       class="input input-sm validator" required placeholder="Fecha"
       min="2025-01-01" max="2025-12-31"
       title="La fecha de ser después de hoy"
@@ -21,7 +25,10 @@
   </label>
 
   <label class="floating-label">
-    <input type="time" placeholder="Hora"
+    <input
+      type="time"
+      formControlName="hour"
+      placeholder="Hora"
       class="input input-sm validator" required
       min="09:00"
       max="18:00"
@@ -34,18 +41,30 @@
   <h3 class="text-1xl col-span-2 ">Información del cliente</h3>
 
   <label class="floating-label col-span-2 ">
-    <input type="text" placeholder="Email" class="input input-sm w-full" required />
+    <input
+      type="text"
+      formControlName="clientEmail"
+      placeholder="Email"
+      class="input input-sm validator w-full" required
+    />
     <span>Email</span>
   </label>
 
   <label class="floating-label col-span-2 ">
-    <input type="text" placeholder="Nombre" class="input input-sm w-full" required />
+    <input
+      type="text"
+      formControlName="clientFullName"
+      placeholder="Nombre"
+      class="input input-sm validator w-full" required
+    />
     <span>Nombre</span>
   </label>
 
   <label class="floating-label col-span-2 ">
     <input
-      type="tel" class="input input-sm validator tabular-nums w-full"
+      type="tel"
+      formControlName="clientPhone"
+      class="input input-sm validator tabular-nums w-full"
       required placeholder="Teléfono"
       pattern="[0-9]*" minlength="9" maxlength="9" title="Deben ser 9 dígitos"
     />
@@ -55,4 +74,25 @@
   <div class="col-span-2 flex justify-center">
     <input type="submit" class="btn btn-neutral" value="Reservar" >
   </div>
+
 </form>
+@if(isInValid()) {
+  <div role="alert" class="alert fixed right-3 bottom-3 alert-error">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span>Por favor, ingrese correctamente los datos en el formulario</span>
+  </div>
+}
+<!--  -->
+@if(hasError()) {
+  <div role="alert" class="alert fixed right-3 bottom-3 alert-error">
+    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+    </svg>
+    <span class="w-3xs">
+      Lo sentimos, este restaurante no tiene sitio para el día seleccionado. Le recomendamos intentar
+      con una fecha distinta.
+    </span>
+  </div>
+}

@@ -5,7 +5,6 @@ import { environment } from '../../../environments/environment';
 import { Observable, tap } from 'rxjs';
 import { Restaurant } from '../interfaces/restaurant.intesface';
 
-
 const baseUrl = environment.baseUrl
 
 interface Options {
