@@ -1,37 +1,72 @@
 <div class="overflow-x-auto rounded-box border border-base-content/5 bg-base-100">
   <table class="table table-zebra">
     <!-- head -->
-    <thead class="bg-neutral text-neutral-content">
-      <tr>
-        <th>Nombre</th>
-        <th>Numero comensales</th>
-        <th>Fecha</th>
-        <th>Hora</th>
-        <th>Restaurante</th>
-        <th>Numero restaurante</th>
-        <th>Email restaurante</th>
-      </tr>
-    </thead>
-    <tbody>
-      <!-- row 1 -->
-      @for (reservation of reservations(); track reservation) {
+    @if(reservationType() === 'restaurant') {
+      <thead class="bg-neutral text-neutral-content">
         <tr>
-          <td>{{reservation.fromClientName}}</td>
-          <td>{{reservation.numDiners}}</td>
-          <td>{{reservation.date}}</td>
-          <td>{{reservation.hour}}</td>
-          <td>{{reservation.restaurant.name}}</td>
-          <td>{{reservation.restaurant.numberPhone}}</td>
-          <td>{{reservation.restaurant.email}}</td>
+          <th>Nombre</th>
+          <th>Numero comensales</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Numero cliente</th>
+          <th>Email cliente</th>
         </tr>
-      }
-      @empty {
+      </thead>
+      <tbody class="text-accent-content">
+        <!-- row 1 -->
+        @for (reservation of reservations(); track reservation) {
+          <tr>
+            <td>{{reservation.fromClientName}}</td>
+            <td>{{reservation.numDiners}}</td>
+            <td>{{reservation.date}}</td>
+            <td>{{reservation.hour}}</td>
+            <td>{{reservation.client.numberPhone}}</td>
+            <td>{{reservation.client.email}}</td>
+          </tr>
+        }
+        @empty {
+          <tr>
+            <td colspan="7" class="text-center">
+              No hay reservas
+            </td>
+          </tr>
+        }
+      </tbody>
+    }
+    <!--  -->
+    @else {
+      <thead class="bg-neutral text-neutral-content">
         <tr>
-          <td colspan="7" class="text-center">
-            No hay reservas
-          </td>
+          <th>Nombre</th>
+          <th>Numero comensales</th>
+          <th>Fecha</th>
+          <th>Hora</th>
+          <th>Restaurante</th>
+          <th>Numero restaurante</th>
+          <th>Email restaurante</th>
         </tr>
-      }
-    </tbody>
+      </thead>
+      <tbody>
+        <!-- row 1 -->
+        @for (reservation of reservations(); track reservation) {
+          <tr>
+            <td>{{reservation.fromClientName}}</td>
+            <td>{{reservation.numDiners}}</td>
+            <td>{{reservation.date}}</td>
+            <td>{{reservation.hour}}</td>
+            <td>{{reservation.restaurant.name}}</td>
+            <td>{{reservation.restaurant.numberPhone}}</td>
+            <td>{{reservation.restaurant.email}}</td>
+          </tr>
+        }
+        @empty {
+          <tr>
+            <td colspan="7" class="text-center">
+              No hay reservas
+            </td>
+          </tr>
+        }
+      </tbody>
+    }
   </table>
 </div>

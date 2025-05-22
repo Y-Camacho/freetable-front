@@ -1,0 +1,60 @@
+<div class="max-w-5xl mx-auto p-6 bg-white shadow rounded-2xl space-y-6 mb-4">
+
+  <!-- Nombre e información general -->
+  <div class="flex flex-col md:flex-row justify-between items-start md:items-center">
+    <div>
+      <h1 class="text-3xl font-bold text-gray-800">{{ restaurantResource.value()!.name }}</h1>
+      <p class="text-sm text-gray-500">{{ restaurantResource.value()!.email }}</p>
+      <p class="text-sm text-gray-500">{{ restaurantResource.value()!.numberPhone }}</p>
+    </div>
+    <div class="mt-4 md:mt-0">
+      <p class="text-sm text-gray-600">Capacidad: {{ restaurantResource.value()!.numDiners }} personas</p>
+    </div>
+  </div>
+
+  <!-- Descripción -->
+  <div>
+    <h2 class="text-xl font-semibold text-gray-700 mb-2">Descripción</h2>
+    <p class="text-gray-600">{{ restaurantResource.value()!.description }}</p>
+  </div>
+
+  <!-- Dirección -->
+  <div>
+    <h2 class="text-xl font-semibold text-gray-700 mb-2">Dirección</h2>
+    <p class="text-gray-600">{{ restaurantResource.value()!.address }}</p>
+  </div>
+
+  <!-- Etiquetas -->
+  <div>
+    <h2 class="text-xl font-semibold text-gray-700 mb-2">Etiquetas</h2>
+    <div class="flex flex-wrap gap-2" [innerHTML]="restaurantResource.value()?.tags ?? [] | restaurantTags"></div>
+  </div>
+
+  <!-- Imágenes -->
+  <div>
+    <h2 class="text-xl font-semibold text-gray-700 mb-2">Galería</h2>
+    <div class="grid grid-cols-2 md:grid-cols-3 gap-4">
+      @for (img of restaurantResource.value()?.images; track img) {
+        <img
+          [src]="img | restaurantImage" alt="Imagen del restaurante"
+          class="w-full h-32 object-cover rounded-xl shadow"
+        />
+      }
+    </div>
+  </div>
+
+  <!-- Menús -->
+  <div>
+    <h2 class="text-xl font-semibold text-gray-700 mb-2">Menús disponibles</h2>
+    <ul class="list-disc list-inside text-gray-600 space-y-1">
+      @for (menu of restaurantResource.value()?.menus; track menu) {
+        <li><a [href]="menu | restaurantMenu" target="_blank">{{menu}}</a></li>
+      }
+    </ul>
+  </div>
+
+</div>
+<div class="max-w-5xl mx-auto p-6 bg-white shadow rounded-2xl space-y-6">
+  <h1 class="text-3xl font-bold text-gray-800">Reservas</h1>
+  <reservation-table [reservationType]="'restaurant'" [reservations]="reservationResource.value() ?? []" />
+</div>

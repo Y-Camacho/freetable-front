@@ -10,4 +10,5 @@ import { Reservation } from '../../interfaces/reservation.interface';
 export class ReservationTableComponent {
 
   reservations = input.required<Reservation[]>();
+  reservationType = input<string>('');
 }

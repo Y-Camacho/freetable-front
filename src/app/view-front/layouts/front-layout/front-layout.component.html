@@ -11,18 +11,18 @@
             class="btn btn-sm btn-neutral"
             routerLink="/admin"
           >
-            Volver al pánel
+            Ir al pánel
           </button>
           <button
             class="btn btn-sm btn-soft"
             (click)="authService.logout()"
           >
-            Salir
+            Logout
           </button>
         </div>
       }
       <!--  -->
-      @else {
+      @else if ( authService.authStatus() === 'not-authenticated') {
         <ul class="menu lg:menu-horizontal bg-base-200 mr-14 rounded-box">
           <li>
             <details >
@@ -34,6 +34,11 @@
           </li>
         </ul>
       }
+      <!--  -->
+      @else {
+        <a class="btn btn-ghost">...</a>
+      }
+
     </div>
   </header>
 

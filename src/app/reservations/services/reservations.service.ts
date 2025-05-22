@@ -34,6 +34,19 @@ export class ReservationsService {
     )
   }
 
+  getRestaurantReservations(resId: string): Observable<Reservation[]> {
+
+    if(resId === null ) return of([]);
+
+    return this.http.get<Reservation[]>(`${baseUrl}/reservation`, {
+      params: {
+        resId: resId
+      }
+    }).pipe(
+      tap( resp => console.log(resp))
+    )
+  }
+
   newReservation(reservationBody: ReservationDto): Observable<boolean> {
 
     return this.http.post<Reservation>(`${baseUrl}/reservation`, reservationBody)
